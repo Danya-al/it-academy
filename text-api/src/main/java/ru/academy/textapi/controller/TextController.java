@@ -33,4 +33,14 @@ public class TextController {
     public Map<Character, Integer> letterMap(@RequestParam String text) {
         return textService.letterMap(text);
     }
+
+    @GetMapping("/char-count")
+    public Map<Character, Integer> countChars(@RequestParam String text) {
+        return textService.countChars(text);
+    }
+
+    @GetMapping("/char-count-stream")
+    public Map<Character, Integer> countCharsStream(@RequestParam String text) {
+        return textService.countCharsStream(text);
+    }
 }
