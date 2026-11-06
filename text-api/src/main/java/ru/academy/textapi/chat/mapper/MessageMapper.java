@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Component
 public class MessageMapper {
-    public Message ToEntity(ChatMessageDto dto, String senderIp) {
+    public Message toEntity(ChatMessageDto dto, String senderIp) {
         Message message = new Message();
         message.setSenderName(dto.senderName());
         message.setContent(dto.message());
