@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
+import ru.academy.textapi.dto.AuthorDto;
 import ru.academy.textapi.entity.Author;
 import ru.academy.textapi.service.AuthorService;
 
@@ -26,29 +27,23 @@ public class AuthorController {
     }
 
     @GetMapping
-    public List<Author> getAll() {
+    public List<AuthorDto> getAll() {
         return authorService.getAll();
     }
 
     @GetMapping("/{id}")
-    public Author getById(@PathVariable Long id) {
+    public AuthorDto getById(@PathVariable Long id) {
         return authorService.getById(id);
     }
 
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public Author create(@RequestBody Author author) {
-        return authorService.create(author);
+    public AuthorDto create(@RequestBody AuthorDto dto) {
+        return authorService.create(dto);
     }
 
     @PutMapping("/{id}")
-    public Author update(@PathVariable Long id, @RequestBody Author author) {
-        return authorService.update(id, author);
-    }
-
-    @DeleteMapping("/{id}")
-    @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@PathVariable Long id) {
-        authorService.delete(id);
+    public AuthorDto update(@PathVariable Long id, @RequestBody AuthorDto dto) {
+        return authorService.update(id, dto);
     }
 }
