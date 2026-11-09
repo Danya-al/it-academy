@@ -31,7 +31,6 @@ public class ChatService {
         this.messageMapper = messageMapper;
     }
 
-    // 1. Отправить сообщение на другой сервер
     public void sendMessage(SendMessageRequest request) {
         String url = "http://" + request.ip() + "/api/chat/receive-message";
         ChatMessageDto dto = new ChatMessageDto(request.senderName(), request.message());
@@ -39,21 +38,18 @@ public class ChatService {
         log.info("Отправлено на {}: {}", request.ip(), request.message());
     }
 
-    // 2. Принять сообщение от другого сервера и сохранить в базу
     public void receiveMessage(ChatMessageDto dto, String senderIp) {
         log.info("Сообщение от {} ({}): {}", dto.senderName(), senderIp, dto.message());
         Message message = messageMapper.toEntity(dto, senderIp);
         messageRepository.save(message);
     }
 
-    // 3. Все сохранённые сообщения
     public List<MessageDto> readAllMessages() {
         return messageRepository.findAll().stream()
                 .map(m -> messageMapper.toDto(m))
                 .collect(Collectors.toList());
     }
 
-    // 4. Сообщения от конкретного отправителя: по имени или по IP
     public List<MessageDto> readAllMessagesFrom(String senderName, String senderIp) {
         List<Message> messages;
         if (senderName != null) {

@@ -14,7 +14,6 @@ public class TextController {
 
     private final TextService textService;
 
-    // Spring сам создаст TextService и передаст его сюда (внедрение зависимости, DI)
     public TextController(TextService textService) {
         this.textService = textService;
     }

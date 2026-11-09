@@ -24,25 +24,21 @@ public class ChatController {
         this.chatService = chatService;
     }
 
-    // 1. Ты из Postman → свой сервер: «отправь сообщение»
     @PostMapping("/send-message")
     public void sendMessage(@RequestBody SendMessageRequest request) {
         chatService.sendMessage(request);
     }
 
-    // 2. Другой сервер → твой сервер: «вот тебе сообщение»
     @PostMapping("/receive-message")
     public void receiveMessage(@RequestBody ChatMessageDto dto, HttpServletRequest request) {
         chatService.receiveMessage(dto, request.getRemoteAddr());
     }
 
-    // 3. Все сообщения
     @GetMapping("/messages")
     public List<MessageDto> readAllMessages() {
         return chatService.readAllMessages();
     }
 
-    // 4. Сообщения от кого-то: /messages/from?name=Daniil или /messages/from?ip=127.0.0.1
     @GetMapping("/messages/from")
     public List<MessageDto> readAllMessagesFrom(@RequestParam(required = false) String name,
                                                 @RequestParam(required = false) String ip) {

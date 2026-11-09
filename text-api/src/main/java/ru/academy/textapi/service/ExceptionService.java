@@ -25,7 +25,7 @@ public class ExceptionService {
             checkCheckedExceptionRequiredThrows();
             return "no exception";
         } catch (IOException e) {
-            logger.error("Caught IOException in catchAndLogException", e); // сообщение, потом исключение
+            logger.error("Caught IOException in catchAndLogException", e);
             e.printStackTrace();
             return "Exception caught and logged: " + e.getMessage();
         }
