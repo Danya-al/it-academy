@@ -4,8 +4,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+import ru.academy.textapi.dto.BookDto;
 import ru.academy.textapi.dto.BookPagesDto;
-import ru.academy.textapi.entity.Book;
 import ru.academy.textapi.service.BookService;
 
 import java.util.List;
@@ -21,17 +21,17 @@ public class BookController {
     }
 
     @GetMapping
-    public List<Book> getAll() {
+    public List<BookDto> getAll() {
         return bookService.getAll();
     }
 
     @GetMapping("/more-than-100-pages")
-    public List<Book> getMoreThan100Pages() {
+    public List<BookDto> getMoreThan100Pages() {
         return bookService.getBooksWithMorePages(100);
     }
 
     @GetMapping("/more-than")
-    public List<Book> getMoreThan(@RequestParam int pages) {
+    public List<BookDto> getMoreThan(@RequestParam int pages) {
         return bookService.getBooksWithMorePages(pages);
     }
 
