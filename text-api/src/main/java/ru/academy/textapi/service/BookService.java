@@ -5,6 +5,7 @@ import ru.academy.textapi.dto.BookDto;
 import ru.academy.textapi.dto.BookPagesDto;
 import ru.academy.textapi.mapper.BookMapper;
 import ru.academy.textapi.repository.BookRepository;
+import tools.jackson.databind.json.JsonMapper;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -14,10 +15,12 @@ public class BookService {
 
     private final BookRepository bookRepository;
     private final BookMapper bookMapper;
+    private final JsonMapper jsonMapper;
 
-    public BookService(BookRepository bookRepository, BookMapper bookMapper) {
+    public BookService(BookRepository bookRepository, BookMapper bookMapper, JsonMapper jsonMapper) {
         this.bookRepository = bookRepository;
         this.bookMapper = bookMapper;
+        this.jsonMapper = jsonMapper;
     }
 
     public List<BookDto> getAll() {
@@ -37,5 +40,17 @@ public class BookService {
         return bookRepository.findDistinctByAuthors_LastName(lastName).stream()
                 .map(book -> bookMapper.toPagesDto(book))
                 .collect(Collectors.toList());
+    }
+
+    // Задание 2.1: JSON-строка → BookDto вручную
+    public String parseJson(String json) {
+        BookDto dto = jsonMapper.readValue(json, BookDto.class);
+        return "Получен объект: " + dto;
+    }
+
+    // Задание 2.2: List<BookDto> → JSON-строка вручную
+    public String getAllAsJsonString() {
+        List<BookDto> books = getAll();
+        return jsonMapper.writeValueAsString(books);
     }
 }

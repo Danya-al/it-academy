@@ -1,6 +1,8 @@
 package ru.academy.textapi.controller;
 
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,5 +40,15 @@ public class BookController {
     @GetMapping("/by-author")
     public List<BookPagesDto> getByAuthor(@RequestParam String lastName) {
         return bookService.getBooksByAuthor(lastName);
+    }
+
+    @PostMapping("/parse-json")
+    public String parseJson(@RequestBody String json) {
+        return bookService.parseJson(json);
+    }
+
+    @GetMapping("/as-json-string")
+    public String getAllAsJsonString() {
+        return bookService.getAllAsJsonString();
     }
 }
