@@ -1,6 +1,7 @@
 package ru.academy.textapi.practice.generics;
 
 import java.util.List;
+import java.util.Objects;
 
 public class GenericUtils {
 
@@ -34,5 +35,22 @@ public class GenericUtils {
                 }
             }
         }
+    }
+
+    public static <T> int searchItem(List<T> list, T itemToFind) {
+        for (int i = 0; i < list.size(); i++) {
+            if (Objects.equals(list.get(i), itemToFind)) {
+                return i;                       // нашли — сразу выходим
+            }
+        }
+        return -1;                              // прошли весь список — нет
+    }
+
+    public static <T> Tuple<Integer, T> searchInList(List<T> list, T itemToFind) {
+        int index = searchItem(list, itemToFind);   // не повторяем цикл
+        if (index == -1) {
+            return new Tuple<>(-1, null);
+        }
+        return new Tuple<>(index, list.get(index));
     }
 }

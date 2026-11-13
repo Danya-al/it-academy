@@ -21,5 +21,14 @@ public class GenericsDemo {
         System.out.println("Список до:    " + ages);
         GenericUtils.bubbleSort(ages);
         System.out.println("Список после: " + ages);
+
+        Tuple<Integer, String> pair = new Tuple<>(2, "Москва");
+        System.out.println("Пара: " + pair + ", первое = " + pair.first());
+
+        List<String> cities = List.of("Тюмень", "Москва", "Казань");
+        System.out.println("Москва: индекс " + GenericUtils.searchItem(cities, "Москва"));
+        System.out.println("Москва: " + GenericUtils.searchInList(cities, "Москва"));
+        System.out.println("Сочи: " + GenericUtils.searchInList(cities, "Сочи"));
+        System.out.println("Число 12: " + GenericUtils.searchInList(ages, 12));
     }
 }
