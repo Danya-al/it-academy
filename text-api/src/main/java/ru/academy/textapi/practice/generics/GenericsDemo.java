@@ -1,6 +1,8 @@
 package ru.academy.textapi.practice.generics;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class GenericsDemo {
 
@@ -14,5 +16,10 @@ public class GenericsDemo {
         System.out.println("Числа до:     " + Arrays.toString(numbers));
         GenericUtils.bubbleSort(numbers);
         System.out.println("Числа после:  " + Arrays.toString(numbers));
+
+        List<Integer> ages = new ArrayList<>(List.of(7, 3, 12, 1));
+        System.out.println("Список до:    " + ages);
+        GenericUtils.bubbleSort(ages);
+        System.out.println("Список после: " + ages);
     }
 }

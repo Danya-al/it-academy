@@ -1,5 +1,7 @@
 package ru.academy.textapi.practice.generics;
 
+import java.util.List;
+
 public class GenericUtils {
 
     public static <T> void swap(T[] array, int i, int j) {
@@ -13,6 +15,22 @@ public class GenericUtils {
             for (int j = 0; j < array.length - 1 - i; j++) {
                 if (array[j].compareTo(array[j + 1]) > 0) {
                     swap(array, j, j + 1);
+                }
+            }
+        }
+    }
+
+    public static <T> void swap(List<T> list, int i, int j) {
+        T temp = list.get(i);
+        list.set(i, list.get(j));
+        list.set(j, temp);
+    }
+
+    public static <T extends Comparable<T>> void bubbleSort(List<T> list) {
+        for (int i = 0; i < list.size() - 1; i++) {
+            for (int j = 0; j < list.size() - 1 - i; j++) {
+                if (list.get(j).compareTo(list.get(j + 1)) > 0) {
+                    swap(list, j, j + 1);
                 }
             }
         }
