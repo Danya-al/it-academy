@@ -2,6 +2,7 @@ package ru.academy.textapi.practice.reflection;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
+import java.util.Map;
 
 public class ReflectionDemo {
 
@@ -25,5 +26,15 @@ public class ReflectionDemo {
 
         String result = (String) secretMethod.invoke(cat, "мяу");
         System.out.println("Результат секретного метода: " + result);
+
+        Cat mappedCat = new Cat("Мурзик", 3);
+
+        Map<String, Object> values = Map.of(
+                "name", "Тишка",
+                "age", "5"
+        );
+
+        ReflectionMapper.fill(mappedCat, values);
+        System.out.println(mappedCat);
     }
 }
